@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c2t1p7ygfoyf5"]
+
+[ext_resource type="PackedScene" uid="uid://84gmsqp65ude" path="res://charge_particles.tscn" id="1_8j746"]
+[ext_resource type="Script" uid="uid://8cjwwjydqi32" path="res://particle_scene.gd" id="1_fjt5y"]
+[ext_resource type="PackedScene" uid="uid://dx1rg8uw455qn" path="res://player_die_particles.tscn" id="2_fjt5y"]
+[ext_resource type="PackedScene" uid="uid://cww4duiie8byr" path="res://background_particles.tscn" id="3_6tv6d"]
+[ext_resource type="PackedScene" uid="uid://vbbvmcqgxk3o" path="res://sparkling_particles.tscn" id="4_ybae8"]
+[ext_resource type="PackedScene" uid="uid://bp15jq1bbpoml" path="res://crystal_explode.tscn" id="5_apcea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b08na"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="ParticleScene" type="Node2D" unique_id=467036613]
+script = ExtResource("1_fjt5y")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=89709930]
+
+[node name="ChargeParticles" parent="Node2D" unique_id=1525757520 instance=ExtResource("1_8j746")]
+position = Vector2(0, -1)
+
+[node name="PlayerDieParticles" parent="Node2D" unique_id=140880233 instance=ExtResource("2_fjt5y")]
+
+[node name="BackgroundParticles" parent="Node2D" unique_id=369848831 instance=ExtResource("3_6tv6d")]
+position = Vector2(230, 179)
+
+[node name="GPUParticles2D" parent="Node2D" unique_id=279194153 instance=ExtResource("4_ybae8")]
+position = Vector2(355, 355)
+
+[node name="GPUParticles2D2" parent="Node2D" unique_id=1000612826 instance=ExtResource("5_apcea")]
+position = Vector2(497, 132)
+
+[node name="Panel" type="Panel" parent="." unique_id=1413799068]
+offset_left = -372.0
+offset_top = -191.0
+offset_right = 1669.0
+offset_bottom = 921.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b08na")

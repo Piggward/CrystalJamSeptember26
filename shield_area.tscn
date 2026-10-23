@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://8dpbgshb7l3o"]
+
+[ext_resource type="Texture2D" uid="uid://ym1vjbtrpvn0" path="res://dingbats-445.png" id="1_ro0lm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b08na"]
+radius = 12.0415945
+
+[node name="ShieldArea" type="Area2D" unique_id=777448869]
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=701750553]
+shape = SubResource("CircleShape2D_b08na")
+
+[node name="Dingbats445" type="Sprite2D" parent="." unique_id=2114861438]
+modulate = Color(0.95686275, 1, 0.54901963, 1)
+position = Vector2(7.6293945e-06, 0)
+scale = Vector2(0.059244655, 0.059244655)
+texture = ExtResource("1_ro0lm")

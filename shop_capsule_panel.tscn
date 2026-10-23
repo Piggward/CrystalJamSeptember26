@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cs4bio1nvm0ir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlrf8"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Panel" type="Panel" unique_id=1254064286]
+custom_minimum_size = Vector2(15, 25)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vlrf8")

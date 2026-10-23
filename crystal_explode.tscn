@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bp15jq1bbpoml"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kxb6e"]
+load_path = "res://.godot/imported/dingbats-489.png-75d426cacd2fc1d112b4c91a7cde4e76.ctex"
+
+[sub_resource type="Curve" id="Curve_nmoc2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.24896267, 0.50537634), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gxs1y"]
+curve = SubResource("Curve_nmoc2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kxb6e"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 340.5
+initial_velocity_max = 620.07
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_gxs1y")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" unique_id=1000612826]
+modulate = Color(0.23921569, 0.7137255, 0.8, 1)
+emitting = false
+amount = 30
+texture = SubResource("CompressedTexture2D_kxb6e")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_kxb6e")

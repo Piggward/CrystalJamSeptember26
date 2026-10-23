@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://csbke3fj6u46c"]
+
+[ext_resource type="Script" uid="uid://y5ni4hlbq8mu" path="res://crystal.gd" id="1_200vn"]
+[ext_resource type="PackedScene" uid="uid://vbbvmcqgxk3o" path="res://sparkling_particles.tscn" id="2_c8x7k"]
+[ext_resource type="AudioStream" uid="uid://dlvrpni2d2yxw" path="res://audio/din.mp3" id="3_nmoc2"]
+[ext_resource type="PackedScene" uid="uid://bp15jq1bbpoml" path="res://crystal_explode.tscn" id="3_oe4af"]
+[ext_resource type="AudioStream" uid="uid://css4xxac4evnk" path="res://audio/shatter.mp3" id="4_nmoc2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b08na"]
+size = Vector2(26, 50)
+
+[sub_resource type="Animation" id="Animation_200vn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Polygon2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gxs1y"]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D2:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kxb6e"]
+resource_name = "shine"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(3.2944162, 3.2944162, 3.2944162, 1), Color(1.8247963, 1.8247963, 1.8247963, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxs1y"]
+_data = {
+&"RESET": SubResource("Animation_200vn"),
+&"die": SubResource("Animation_gxs1y"),
+&"shine": SubResource("Animation_kxb6e")
+}
+
+[node name="Crystal" type="Node2D" unique_id=13645320]
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
+light_mask = 0
+script = ExtResource("1_200vn")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=510104611]
+scale = Vector2(0.5, 0.5)
+color = Color(0.23921569, 0.7137255, 0.8, 1)
+polygon = PackedVector2Array(0, -40, -15, -25, -15, 25, 0, 40, 15, 25, 15, -25)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2090463789]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=500211705]
+visible = false
+shape = SubResource("RectangleShape2D_b08na")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1964122408]
+libraries/ = SubResource("AnimationLibrary_gxs1y")
+autoplay = &"shine"
+
+[node name="GPUParticles2D" parent="." unique_id=279194153 instance=ExtResource("2_c8x7k")]
+
+[node name="GPUParticles2D2" parent="." unique_id=1000612826 instance=ExtResource("3_oe4af")]
+
+[node name="Ding" type="AudioStreamPlayer2D" parent="." unique_id=1447551810]
+stream = ExtResource("3_nmoc2")
+volume_db = -12.0
+bus = &"SFX"
+
+[node name="Shatter" type="AudioStreamPlayer2D" parent="." unique_id=1481985689]
+stream = ExtResource("4_nmoc2")
+volume_db = 10.0
+bus = &"SFX"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dvlmn50f7r10u"]
+
+[ext_resource type="Script" uid="uid://dck3a7wg3cj7y" path="res://shop_button.gd" id="1_wxfep"]
+[ext_resource type="Script" uid="uid://8tg1wgwqv3hu" path="res://speed_shop_type.gd" id="2_d8bsp"]
+[ext_resource type="Script" uid="uid://cxr3wnaie7skk" path="res://shop_type.gd" id="2_v846v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b08na"]
+bg_color = Color(0.3137255, 1, 0.8352941, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Resource" id="Resource_kdubu"]
+script = ExtResource("2_d8bsp")
+speed_bonus = 500.0
+description = "Increase speed"
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b08na"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=405489318]
+custom_minimum_size = Vector2(100, 30)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_b08na")
+script = ExtResource("1_wxfep")
+items = Array[ExtResource("2_v846v")]([SubResource("Resource_kdubu")])
+
+[node name="Label" type="Label" parent="." unique_id=1210469653]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 24
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1197399219]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b08na")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b08na")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b08na")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b08na")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b08na")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

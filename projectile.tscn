@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bfkjoxk1ixfhc"]
+
+[ext_resource type="Script" uid="uid://hl0gvtnjfyp0" path="res://projectile.gd" id="1_a85iw"]
+[ext_resource type="Texture2D" uid="uid://b15nfqvtgwttn" path="res://flare_12.png" id="2_qxf0c"]
+[ext_resource type="Texture2D" uid="uid://b7rjeyn11qnmw" path="res://color_burst_1.png" id="3_dgwo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b08na"]
+size = Vector2(6, 6)
+
+[sub_resource type="Animation" id="Animation_qxf0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flare12:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.09850336, 0.09850336)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dgwo2"]
+resource_name = "bob"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flare12:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.09850336, 0.09850336), Vector2(0.129, 0.129)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(2.454227, 2.454227, 2.454227, 1), Color(2.454, 2.454, 2.454, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxmqc"]
+_data = {
+&"RESET": SubResource("Animation_qxf0c"),
+&"bob": SubResource("Animation_dgwo2")
+}
+
+[sub_resource type="Gradient" id="Gradient_qxf0c"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b08na"]
+gradient = SubResource("Gradient_qxf0c")
+width = 100
+height = 100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="Projectile" type="Node2D" unique_id=1320003285]
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
+light_mask = 0
+script = ExtResource("1_a85iw")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1495572112]
+visible = false
+scale = Vector2(2.4132743, 2.4132743)
+color = Color(1, 0.3137255, 0.3137255, 1)
+polygon = PackedVector2Array(-4, -2, -2, -4, 2, -4, 4, -2, 4, 2, 2, 4, -2, 4, -4, 2)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1640846387]
+scale = Vector2(2.4132743, 2.4132743)
+collision_layer = 4
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=557683398]
+shape = SubResource("RectangleShape2D_b08na")
+
+[node name="Flare12" type="Sprite2D" parent="." unique_id=2029780146]
+modulate = Color(1, 0.3137255, 0.3137255, 1)
+position = Vector2(3.8146973e-06, 4.7683716e-07)
+scale = Vector2(0.09850336, 0.09850336)
+texture = ExtResource("2_qxf0c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1559927285]
+libraries/ = SubResource("AnimationLibrary_sxmqc")
+autoplay = &"bob"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1332713234]
+color = Color(1, 0, 0, 1)
+texture = SubResource("GradientTexture2D_b08na")
+
+[node name="ColorBurst1" type="Sprite2D" parent="." unique_id=266797039]
+modulate = Color(1, 0.99607843, 0.99215686, 0.019607844)
+scale = Vector2(0.09185853, 0.09185853)
+texture = ExtResource("3_dgwo2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

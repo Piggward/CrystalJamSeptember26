@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cww4duiie8byr"]
+
+[ext_resource type="Texture2D" uid="uid://oat0n1r1vw01" path="res://lines_6.png" id="1_0oxi6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b08na"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.04
+color = Color(1, 1, 1, 0.23529412)
+
+[node name="BackgroundParticles" type="GPUParticles2D" unique_id=369848831]
+amount = 25
+texture = ExtResource("1_0oxi6")
+lifetime = 2.0
+randomness = 1.0
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_b08na")

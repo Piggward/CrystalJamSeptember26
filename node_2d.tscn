@@ -1,0 +1,834 @@
+[gd_scene format=3 uid="uid://cuyfmoefkfp7s"]
+
+[ext_resource type="Script" uid="uid://tc6es2tj6xs2" path="res://player_node.gd" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://c270uno0upca0" path="res://level.gd" id="1_0h7mo"]
+[ext_resource type="PackedScene" uid="uid://cww4duiie8byr" path="res://background_particles.tscn" id="2_e8dv2"]
+[ext_resource type="PackedScene" uid="uid://bp15jq1bbpoml" path="res://crystal_explode.tscn" id="3_540hr"]
+[ext_resource type="Script" uid="uid://6ohsns6t11xe" path="res://crystal_spawner.gd" id="3_epypp"]
+[ext_resource type="Script" uid="uid://c8dgjh2clygp5" path="res://laser_line.gd" id="3_q6r6c"]
+[ext_resource type="Script" uid="uid://c63l7ty6xvk7k" path="res://obstacle_spawner.gd" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://dxchfwk7y0x7i" path="res://spiky_20.png" id="4_ebxd8"]
+[ext_resource type="Script" uid="uid://diov5lbilubn6" path="res://shields.gd" id="4_hqns4"]
+[ext_resource type="PackedScene" uid="uid://dx1rg8uw455qn" path="res://player_die_particles.tscn" id="6_flf07"]
+[ext_resource type="PackedScene" uid="uid://dvlmn50f7r10u" path="res://shop_item.tscn" id="6_kdubu"]
+[ext_resource type="Script" uid="uid://yjf00upd7kw0" path="res://trail.gd" id="6_ta5nu"]
+[ext_resource type="AudioStream" uid="uid://carff2tgh5ahy" path="res://audio/47313572-sci-fi-launch-351236.mp3" id="7_k73cj"]
+[ext_resource type="Script" uid="uid://cxr3wnaie7skk" path="res://shop_type.gd" id="7_rj586"]
+[ext_resource type="Script" uid="uid://b2no67o8rlkjv" path="res://laser_shop_type.gd" id="8_4d7sh"]
+[ext_resource type="AudioStream" uid="uid://f4lk3qdr2fo5" path="res://audio/charge.mp3" id="8_rjqkl"]
+[ext_resource type="PackedScene" uid="uid://84gmsqp65ude" path="res://charge_particles.tscn" id="9_2nhjh"]
+[ext_resource type="Script" uid="uid://6fu74n8wiv4u" path="res://collection_shop_type.gd" id="9_4d7sh"]
+[ext_resource type="Script" uid="uid://dpms0cr8akqtg" path="res://slow_time_shop_type.gd" id="10_ir8iy"]
+[ext_resource type="Script" uid="uid://c1amq03l6pi8s" path="res://crystal_counter.gd" id="11_hqns4"]
+[ext_resource type="Script" uid="uid://cgv23se10tqka" path="res://animation_player.gd" id="12_x0ka3"]
+[ext_resource type="PackedScene" uid="uid://cfbwo7cwdc0ga" path="res://shop_item_2.tscn" id="18_e8dv2"]
+[ext_resource type="Script" uid="uid://8tg1wgwqv3hu" path="res://speed_shop_type.gd" id="19_2nhjh"]
+[ext_resource type="Script" uid="uid://dvggo1hyt53ut" path="res://crystal_ratio_shop_type.gd" id="20_bjha6"]
+[ext_resource type="AudioStream" uid="uid://dc45liadjybpe" path="res://audio/hit_by_ball.mp3" id="20_fs4d3"]
+[ext_resource type="Script" uid="uid://dnjfwb5dq4jjr" path="res://extra_life_shop_type.gd" id="21_1fr6y"]
+[ext_resource type="AudioStream" uid="uid://dpt4hc5f6cjl" path="res://audio/explosion.mp3" id="21_7vxoj"]
+[ext_resource type="Script" uid="uid://sutfdqlnorp1" path="res://jump_counter.gd" id="21_gt76g"]
+[ext_resource type="Script" uid="uid://lfjva7q6rllc" path="res://shield_shop_type.gd" id="22_2hxjc"]
+[ext_resource type="Texture2D" uid="uid://cs0mt077xbrbu" path="res://dingbats-270.png" id="22_ei405"]
+[ext_resource type="Script" uid="uid://cq1wnpouc8dwf" path="res://heart_container.gd" id="25_mryly"]
+[ext_resource type="AudioStream" uid="uid://kqicp86e4bai" path="res://audio/purchase.mp3" id="31_mryly"]
+[ext_resource type="Script" uid="uid://coo5ypskbgl05" path="res://coin_sound.gd" id="32_kq1c5"]
+[ext_resource type="AudioStream" uid="uid://cuviw2rxx6nxq" path="res://audio/game-start.mp3" id="33_kq1c5"]
+[ext_resource type="AudioStream" uid="uid://dgs1p767plsnv" path="res://audio/healpop.mp3" id="34_ornx7"]
+[ext_resource type="PackedScene" uid="uid://csbke3fj6u46c" path="res://crystal.tscn" id="36_6ip5v"]
+
+[sub_resource type="Curve" id="Curve_b08na"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.75085324, 0.24786323), 0.0, 0.0, 0, 0, Vector2(1, 0.64102566), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vlrf8"]
+offsets = PackedFloat32Array(0.10980392, 1)
+colors = PackedColorArray(0.9432344, 2.454227, 0.8499633, 0, 0.9432344, 2.454227, 0.8499633, 0.972549)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hxjc"]
+radius = 17.507141
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjha6"]
+radius = 16.87
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b08na"]
+bg_color = Color(0.3647059, 1, 0.3137255, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="Resource" id="Resource_n0dvu"]
+script = ExtResource("8_4d7sh")
+description = "Enables laser sight"
+metadata/_custom_type_script = "uid://b2no67o8rlkjv"
+
+[sub_resource type="Resource" id="Resource_a85iw"]
+script = ExtResource("9_4d7sh")
+increase_ratio = 2.0
+description = "Increase Crystal Collision"
+metadata/_custom_type_script = "uid://6fu74n8wiv4u"
+
+[sub_resource type="Resource" id="Resource_ir8iy"]
+script = ExtResource("10_ir8iy")
+description = "Slow time while holding space"
+metadata/_custom_type_script = "uid://dpms0cr8akqtg"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlrf8"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi0lc"]
+bg_color = Color(0.06666667, 0, 0.101960786, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpi7t"]
+bg_color = Color(1, 0.6156863, 0.3137255, 1)
+
+[sub_resource type="Resource" id="Resource_2nhjh"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 5
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_kfelt"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 7
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_bjha6"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 15
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_gt76g"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 30
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_1fr6y"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 50
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_2hxjc"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 100
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_ebxd8"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 300
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_2u7jv"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 600
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_24dk6"]
+script = ExtResource("19_2nhjh")
+speed_bonus = 300.0
+description = "LAUNCH SPEED"
+cost = 1000
+metadata/_custom_type_script = "uid://8tg1wgwqv3hu"
+
+[sub_resource type="Resource" id="Resource_mryly"]
+script = ExtResource("20_bjha6")
+ratio = 1.0
+description = "MORE CRYSTALS"
+cost = 10
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_kq1c5"]
+script = ExtResource("20_bjha6")
+ratio = 0.75
+description = "More crystals"
+cost = 20
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_ornx7"]
+script = ExtResource("20_bjha6")
+ratio = 0.5
+description = "More crystals"
+cost = 30
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_cnnru"]
+script = ExtResource("20_bjha6")
+ratio = 0.5
+description = "More crystals"
+cost = 60
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_540hr"]
+script = ExtResource("20_bjha6")
+ratio = 0.5
+description = "More crystals"
+cost = 100
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_6ip5v"]
+script = ExtResource("20_bjha6")
+ratio = 0.5
+description = "More crystals"
+cost = 250
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_ytlpd"]
+script = ExtResource("20_bjha6")
+ratio = 0.25
+description = "More crystals"
+cost = 500
+metadata/_custom_type_script = "uid://dvggo1hyt53ut"
+
+[sub_resource type="Resource" id="Resource_q5dlx"]
+script = ExtResource("9_4d7sh")
+increase_ratio = 0.8
+description = "bigger crystal collector"
+cost = 75
+metadata/_custom_type_script = "uid://6fu74n8wiv4u"
+
+[sub_resource type="Resource" id="Resource_c4wnb"]
+script = ExtResource("9_4d7sh")
+increase_ratio = 0.7
+description = "bigger crystal collector"
+cost = 200
+metadata/_custom_type_script = "uid://6fu74n8wiv4u"
+
+[sub_resource type="Resource" id="Resource_7plk7"]
+script = ExtResource("9_4d7sh")
+increase_ratio = 0.6
+description = "bigger crystal collector"
+cost = 600
+metadata/_custom_type_script = "uid://6fu74n8wiv4u"
+
+[sub_resource type="Resource" id="Resource_fbwgr"]
+script = ExtResource("8_4d7sh")
+description = "laser sight"
+cost = 50
+metadata/_custom_type_script = "uid://b2no67o8rlkjv"
+
+[sub_resource type="Resource" id="Resource_7mj2a"]
+script = ExtResource("10_ir8iy")
+new_ratio = 0.7
+description = "SLOW TIME WHILE HOLDING SPACE"
+cost = 100
+metadata/_custom_type_script = "uid://dpms0cr8akqtg"
+
+[sub_resource type="Resource" id="Resource_2v765"]
+script = ExtResource("10_ir8iy")
+new_ratio = 0.5
+description = "SLOW TIME WHILE HOLDING SPACE"
+cost = 500
+metadata/_custom_type_script = "uid://dpms0cr8akqtg"
+
+[sub_resource type="Resource" id="Resource_b8fb0"]
+script = ExtResource("10_ir8iy")
+new_ratio = 0.4
+description = "SLOW TIME WHILE HOLDING SPACE"
+cost = 1000
+metadata/_custom_type_script = "uid://dpms0cr8akqtg"
+
+[sub_resource type="Resource" id="Resource_fshgd"]
+script = ExtResource("21_1fr6y")
+description = "EXTRA LIFE"
+cost = 50
+metadata/_custom_type_script = "uid://dnjfwb5dq4jjr"
+
+[sub_resource type="Resource" id="Resource_lbrxf"]
+script = ExtResource("21_1fr6y")
+description = "EXTRA LIFE"
+cost = 100
+metadata/_custom_type_script = "uid://dnjfwb5dq4jjr"
+
+[sub_resource type="Resource" id="Resource_xjt7e"]
+script = ExtResource("21_1fr6y")
+description = "EXTRA LIFE"
+cost = 300
+metadata/_custom_type_script = "uid://dnjfwb5dq4jjr"
+
+[sub_resource type="Resource" id="Resource_0xo8l"]
+script = ExtResource("21_1fr6y")
+description = "EXTRA LIFE"
+cost = 2000
+metadata/_custom_type_script = "uid://dnjfwb5dq4jjr"
+
+[sub_resource type="Resource" id="Resource_xfyss"]
+script = ExtResource("22_2hxjc")
+description = "ORBITING SHIELD"
+cost = 75
+metadata/_custom_type_script = "uid://lfjva7q6rllc"
+
+[sub_resource type="Resource" id="Resource_3ngjr"]
+script = ExtResource("22_2hxjc")
+description = "ORBITING SHIELD"
+cost = 300
+metadata/_custom_type_script = "uid://lfjva7q6rllc"
+
+[sub_resource type="Resource" id="Resource_qilgh"]
+script = ExtResource("22_2hxjc")
+description = "ORBITING SHIELD"
+cost = 600
+metadata/_custom_type_script = "uid://lfjva7q6rllc"
+
+[sub_resource type="Resource" id="Resource_4qosj"]
+script = ExtResource("22_2hxjc")
+description = "ORBITING SHIELD"
+cost = 1000
+metadata/_custom_type_script = "uid://lfjva7q6rllc"
+
+[sub_resource type="Resource" id="Resource_cjlbh"]
+script = ExtResource("22_2hxjc")
+description = "ORBITING SHIELD"
+cost = 2000
+metadata/_custom_type_script = "uid://lfjva7q6rllc"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7k70y"]
+bg_color = Color(1, 0.6156863, 0.3137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo3qe"]
+bg_color = Color(0, 0, 0, 0.49411765)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Environment" id="Environment_b08na"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 0.7
+glow_blend_mode = 0
+
+[sub_resource type="Gradient" id="Gradient_0h7mo"]
+colors = PackedColorArray(0.2934363, 0.2934363, 0.2934363, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b08na"]
+gradient = SubResource("Gradient_0h7mo")
+
+[sub_resource type="Animation" id="Animation_7vxoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ei405"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 4.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8dv2"]
+_data = {
+&"RESET": SubResource("Animation_7vxoj"),
+&"new_animation": SubResource("Animation_ei405")
+}
+
+[sub_resource type="Animation" id="Animation_hqns4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x0ka3"]
+resource_name = "hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.7372549), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0h7mo"]
+_data = {
+&"RESET": SubResource("Animation_hqns4"),
+&"hit": SubResource("Animation_x0ka3")
+}
+
+[node name="Node2D" type="Node2D" unique_id=863058592]
+script = ExtResource("1_0h7mo")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=866595877]
+light_mask = 128
+color = Color(0.06666667, 0, 0.101960786, 1)
+polygon = PackedVector2Array(-63, -44, -72, 741, 700, 752, 1395, 660, 1269, -40, 665, -58, 32, -46)
+
+[node name="BackgroundParticles" parent="." unique_id=369848831 instance=ExtResource("2_e8dv2")]
+position = Vector2(557, 1)
+
+[node name="GPUParticles2D2" parent="." unique_id=1000612826 instance=ExtResource("3_540hr")]
+modulate = Color(1.4683453, 0, 0.48873845, 1)
+position = Vector2(274, 300)
+speed_scale = 0.03
+
+[node name="GPUParticles2D3" parent="." unique_id=69498398 instance=ExtResource("3_540hr")]
+modulate = Color(1.3777457, 1.3947332, 0, 1)
+position = Vector2(365, 300)
+speed_scale = 0.03
+
+[node name="GPUParticles2D4" parent="." unique_id=656790302 instance=ExtResource("3_540hr")]
+modulate = Color(0.46923277, 1.3147132, 1.4684367, 1)
+position = Vector2(416, 300)
+speed_scale = 0.03
+
+[node name="Trail" type="Line2D" parent="." unique_id=1081448394]
+points = PackedVector2Array(146, 295, 479, 299)
+width = 26.81
+width_curve = SubResource("Curve_b08na")
+default_color = Color(0.3647059, 1, 0.3137255, 1)
+gradient = SubResource("Gradient_vlrf8")
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("6_ta5nu")
+
+[node name="PlayerNode" type="Node2D" parent="." unique_id=1728781784]
+modulate = Color(2.6034334, 2.6034334, 2.6034334, 1)
+position = Vector2(480, 299)
+script = ExtResource("1_0e48y")
+
+[node name="Area2D" type="Area2D" parent="PlayerNode" unique_id=276232199]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/Area2D" unique_id=1375905276]
+position = Vector2(0.5, 0.5)
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_2hxjc")
+
+[node name="Line2D" type="Line2D" parent="PlayerNode" unique_id=1957907614]
+visible = false
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 2000, 0)
+width = 3.0
+default_color = Color(1, 0, 0, 0.09411765)
+script = ExtResource("3_q6r6c")
+
+[node name="CollectArea" type="Area2D" parent="PlayerNode" unique_id=509362279]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNode/CollectArea" unique_id=1511412313]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_bjha6")
+
+[node name="CrystalCollector" type="Node2D" parent="PlayerNode/CollectArea/CollisionShape2D" unique_id=1057483380]
+rotation = -1.5707964
+
+[node name="Spiky20" type="Sprite2D" parent="PlayerNode/CollectArea/CollisionShape2D/CrystalCollector" unique_id=997679481]
+modulate = Color(0.3647059, 1, 0.3137255, 1)
+scale = Vector2(0.12919927, 0.12919927)
+texture = ExtResource("4_ebxd8")
+
+[node name="Shields" type="Node2D" parent="PlayerNode" unique_id=1639575138]
+script = ExtResource("4_hqns4")
+
+[node name="Panel" type="Panel" parent="PlayerNode" unique_id=1921021043]
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_b08na")
+
+[node name="PlayerDieParticles" parent="PlayerNode" unique_id=140880233 instance=ExtResource("6_flf07")]
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="PlayerNode" unique_id=1657091112]
+stream = ExtResource("7_k73cj")
+bus = &"SFX"
+
+[node name="Charge" type="AudioStreamPlayer2D" parent="PlayerNode" unique_id=1011701793]
+stream = ExtResource("8_rjqkl")
+bus = &"SFX"
+
+[node name="ChargeParticles" parent="PlayerNode" unique_id=1525757520 instance=ExtResource("9_2nhjh")]
+amount = 20
+
+[node name="CrystalSpawner" type="Node2D" parent="." unique_id=1843135417]
+script = ExtResource("3_epypp")
+
+[node name="ShooterSpawner" type="Node2D" parent="." unique_id=710181890]
+script = ExtResource("4_0hol4")
+
+[node name="Marker2D" type="Marker2D" parent="ShooterSpawner" unique_id=1757489409]
+position = Vector2(358, 4)
+
+[node name="Marker2D2" type="Marker2D" parent="ShooterSpawner" unique_id=1135556362]
+position = Vector2(1003, 639)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=553021889]
+process_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1522443871]
+visible = false
+offset_right = 200.0
+offset_bottom = 646.0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="PanelContainer" parent="CanvasLayer/VBoxContainer" unique_id=405489318 instance=ExtResource("6_kdubu")]
+layout_mode = 2
+
+[node name="PanelContainer2" parent="CanvasLayer/VBoxContainer" unique_id=2024028516 instance=ExtResource("6_kdubu")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_n0dvu")])
+
+[node name="PanelContainer3" parent="CanvasLayer/VBoxContainer" unique_id=700165435 instance=ExtResource("6_kdubu")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_a85iw")])
+
+[node name="PanelContainer4" parent="CanvasLayer/VBoxContainer" unique_id=129085059 instance=ExtResource("6_kdubu")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_ir8iy")])
+
+[node name="CrystalCounter" type="Label" parent="CanvasLayer" unique_id=2128815222]
+offset_left = 90.0
+offset_top = 30.0
+offset_right = 270.0
+offset_bottom = 65.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "x25"
+script = ExtResource("11_hqns4")
+
+[node name="JumpCounter" type="Label" parent="CanvasLayer" unique_id=115392547]
+anchors_preset = -1
+anchor_left = 0.022000002
+anchor_top = 0.85200006
+anchor_right = 0.208
+anchor_bottom = 0.97400004
+offset_left = 21.655998
+offset_top = 22.903992
+offset_right = -103.616
+offset_bottom = -21.152039
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Jumps: "
+script = ExtResource("21_gt76g")
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=286563993]
+visible = false
+offset_left = -66.0
+offset_top = -43.0
+offset_right = 1180.0
+offset_bottom = 678.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vlrf8")
+
+[node name="StartLabel" type="Label" parent="CanvasLayer" unique_id=1430430135]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -444.0
+offset_top = -56.0
+offset_right = 444.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 49
+text = "Press space to launch!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shop" type="PanelContainer" parent="CanvasLayer" unique_id=1467193490]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.5
+offset_top = -243.5
+offset_right = 352.5
+offset_bottom = 243.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi0lc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Shop" unique_id=1475305094]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Shop/MarginContainer" unique_id=1554269042]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2" unique_id=748677305]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpi7t")
+
+[node name="Label" type="Label" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/PanelContainer2" unique_id=1341740948]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 45
+text = "Crystals: X"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_hqns4")
+ctext = "CRYSTALS: "
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2" unique_id=1794888368]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ShopContainer" type="GridContainer" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer" unique_id=791755530]
+layout_mode = 2
+theme_override_constants/h_separation = 34
+theme_override_constants/v_separation = 19
+columns = 3
+
+[node name="Control" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=307369668 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_2nhjh"), SubResource("Resource_kfelt"), SubResource("Resource_bjha6"), SubResource("Resource_gt76g"), SubResource("Resource_1fr6y"), SubResource("Resource_2hxjc"), SubResource("Resource_ebxd8"), SubResource("Resource_2u7jv"), SubResource("Resource_24dk6")])
+
+[node name="Control2" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=864745959 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_mryly"), SubResource("Resource_kq1c5"), SubResource("Resource_ornx7"), SubResource("Resource_cnnru"), SubResource("Resource_540hr"), SubResource("Resource_6ip5v"), SubResource("Resource_ytlpd")])
+
+[node name="Control3" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=1154639205 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_q5dlx"), SubResource("Resource_c4wnb"), SubResource("Resource_7plk7")])
+
+[node name="Control4" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=810325178 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_fbwgr")])
+
+[node name="Control5" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=231179947 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_7mj2a"), SubResource("Resource_2v765"), SubResource("Resource_b8fb0")])
+
+[node name="Control6" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=437240896 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_fshgd"), SubResource("Resource_lbrxf"), SubResource("Resource_xjt7e"), SubResource("Resource_0xo8l"), SubResource("Resource_0xo8l"), SubResource("Resource_0xo8l")])
+
+[node name="Control7" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/MarginContainer/ShopContainer" unique_id=1306799147 instance=ExtResource("18_e8dv2")]
+layout_mode = 2
+items = Array[ExtResource("7_rj586")]([SubResource("Resource_xfyss"), SubResource("Resource_3ngjr"), SubResource("Resource_qilgh"), SubResource("Resource_4qosj"), SubResource("Resource_cjlbh")])
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2" unique_id=1284068031]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7k70y")
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer/Shop/MarginContainer/VBoxContainer2/PanelContainer" unique_id=1853975824]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 49
+text = "Press space to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinContainer" type="PanelContainer" parent="CanvasLayer" unique_id=2075300579]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -48.0
+offset_right = 283.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jo3qe")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinContainer" unique_id=1868281921]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinContainer/MarginContainer" unique_id=510486990]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/WinContainer/MarginContainer/VBoxContainer" unique_id=960242311]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93333334, 1, 0.3137255, 1)
+theme_override_font_sizes/font_size = 70
+text = "YOU WIN!!!! "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/WinContainer/MarginContainer/VBoxContainer" unique_id=747194577]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93333334, 1, 0.3137255, 1)
+theme_override_font_sizes/font_size = 25
+text = "Press space to restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeartContainer" type="GridContainer" parent="CanvasLayer" unique_id=1674068566]
+offset_left = 1010.0
+offset_top = 39.0
+offset_right = 1153.0
+offset_bottom = 133.0
+columns = 3
+script = ExtResource("25_mryly")
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer" unique_id=2121535388]
+position = Vector2(71, 47)
+scale = Vector2(0.5, 0.5)
+color = Color(0.23921569, 0.7137255, 0.8, 1)
+polygon = PackedVector2Array(0, -40, -15, -25, -15, 25, 0, 40, 15, 25, 15, -25)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=841114457]
+environment = SubResource("Environment_b08na")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1241650067]
+position = Vector2(577.00006, 325.25)
+scale = Vector2(18.03125, 10.1484375)
+range_item_cull_mask = 128
+texture = SubResource("GradientTexture2D_b08na")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D" unique_id=42458679]
+libraries/ = SubResource("AnimationLibrary_e8dv2")
+autoplay = &"new_animation"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=336109705]
+libraries/ = SubResource("AnimationLibrary_0h7mo")
+script = ExtResource("12_x0ka3")
+
+[node name="HitByBall" type="AudioStreamPlayer2D" parent="." unique_id=609392612]
+stream = ExtResource("20_fs4d3")
+volume_db = 3.0
+bus = &"SFX"
+
+[node name="Died" type="AudioStreamPlayer2D" parent="." unique_id=1322001390]
+stream = ExtResource("21_7vxoj")
+volume_db = 3.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1942022687]
+modulate = Color(1, 0.6666667, 0.54901963, 1)
+position = Vector2(0, 298)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1605591826]
+position = Vector2(56.000004, 4.7683716e-07)
+rotation = -0.7619299
+scale = Vector2(0.15426783, 0.15426783)
+texture = ExtResource("22_ei405")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=115461721]
+position = Vector2(1091, 7.1525574e-07)
+rotation = -3.9043016
+scale = Vector2(0.15426783, 0.15426783)
+texture = ExtResource("22_ei405")
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="." unique_id=270383644]
+stream = ExtResource("31_mryly")
+volume_db = 8.0
+bus = &"SFX"
+script = ExtResource("32_kq1c5")
+
+[node name="StartWave" type="AudioStreamPlayer2D" parent="." unique_id=633952975]
+stream = ExtResource("33_kq1c5")
+volume_db = 10.0
+pitch_scale = 1.8
+bus = &"SFX"
+
+[node name="HealPickup" type="AudioStreamPlayer2D" parent="." unique_id=676009489]
+stream = ExtResource("34_ornx7")
+bus = &"SFX"
+
+[node name="Crystal" parent="." unique_id=13645320 instance=ExtResource("36_6ip5v")]
+position = Vector2(524, 270)
+
+[node name="Crystal3" parent="." unique_id=1166630380 instance=ExtResource("36_6ip5v")]
+position = Vector2(549, 300)
+
+[node name="Polygon2D" parent="Crystal3" index="0" unique_id=510104611]
+color = Color(1, 1, 0, 1)
+
+[node name="AnimationPlayer" parent="Crystal3" index="2" unique_id=1964122408]
+root_node = NodePath("../../Crystal3")
+
+[node name="Crystal2" parent="." unique_id=1763298413 instance=ExtResource("36_6ip5v")]
+position = Vector2(522, 336)
+
+[editable path="Crystal3"]
